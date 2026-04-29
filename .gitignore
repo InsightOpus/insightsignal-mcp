@@ -1,0 +1,16 @@
+# Build artifacts — shipped via GitHub Releases, not committed to the repo
+*.mcpb
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (in case anyone vendors deps locally — current bundle has none)
+node_modules/

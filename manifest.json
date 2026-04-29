@@ -1,0 +1,124 @@
+{
+  "manifest_version": "0.3",
+  "name": "insightsignal",
+  "version": "3.0.4",
+  "display_name": "InsightSignal",
+  "description": "Query your verified knowledge graph — companies, people, research reports, and business relationships — all multi-source verified with confidence scores.",
+  "long_description": "InsightSignal connects Claude to your private, multi-source verified knowledge graph. Every data point is checked by 2+ independent sources with confidence scores, citation URLs, and temporal provenance tracking.\n\n**KEY CAPABILITIES**\n- **Search & Filter**: Find verified companies and people in your private data with grades (A-F), confidence scores, and operational status\n- **Contact Intelligence**: Access email, phone, LinkedIn with deliverability scores and BDR-focused readiness grades\n- **Research Reports**: Read multi-source research with verdicts, evidence links, and competitive analysis\n- **Knowledge Graph**: Explore business relationships — subsidiaries, competitors, partners, key people\n- **Compare & Analyze**: Side-by-side company comparison on key metrics, portfolio-level statistics\n- **Temporal Tracking**: See how verified data changed over time across snapshots\n- **Intent Scoring**: View intent-based relevance scores for sales prospecting, competitor analysis, and more\n\n**TRUST & QUALITY**\n- Multi-source verified: Each field checked by 2+ independent sources\n- Confidence-scored: Numeric 0-1 confidence based on source agreement, freshness, and authority\n- Citation-backed: Every field links to the evidence page where it was verified\n- User knowledge overrides: Your private intel always takes highest priority\n\n**NETWORK ONLY** — This extension only makes API calls to your InsightSignal server. It does not access your filesystem, run shell commands, or modify anything on your computer.",
+  "author": {
+    "name": "InsightOpus",
+    "url": "https://www.insightopus.com"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://www.insightopus.com/insightsignal",
+  "documentation": "https://www.insightopus.com/support",
+  "support": "https://www.insightopus.com/support",
+  "privacy_policies": ["https://www.insightopus.com/legal/privacy"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/insightopus/insightsignal-mcp"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.js"
+      ],
+      "env": {
+        "INSIGHTSIGNAL_API_KEY": "${user_config.api_key}",
+        "INSIGHTSIGNAL_API_URL": "${user_config.api_url}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "API Key",
+      "description": "Your InsightSignal API key (starts with is_). Create one in Profile → API Keys.",
+      "sensitive": true,
+      "required": true
+    },
+    "api_url": {
+      "type": "string",
+      "title": "API URL",
+      "description": "InsightSignal API endpoint URL",
+      "default": "https://dgapi.insightopus.com/mcp",
+      "required": true
+    }
+  },
+  "tools": [
+    {
+      "name": "search_companies",
+      "description": "Search and filter verified companies by name, industry, location, grade, operational status, or disposition. Supports pagination."
+    },
+    {
+      "name": "search_people",
+      "description": "Search verified contacts by name, title, company, email, or phone. Filter by readiness grade, email deliverability, or phone validity."
+    },
+    {
+      "name": "entity_get_company",
+      "description": "Get full company profile — grade, confidence scores, operational status, verification sources, field-level provenance, and all metadata."
+    },
+    {
+      "name": "entity_get_person",
+      "description": "Get person detail — name, title, email with deliverability, phone with validation, LinkedIn, readiness grade, and enrichment history."
+    },
+    {
+      "name": "entity_get_company_people",
+      "description": "List all verified contacts at a specific company with their roles, contact info, and readiness scores."
+    },
+    {
+      "name": "entity_get_company_research",
+      "description": "Get multi-source research report — ActionHero verdict, evidence-backed sections, competitive signals, and fact extraction."
+    },
+    {
+      "name": "compare_companies",
+      "description": "Side-by-side comparison of two companies on grades, industry, size, revenue, confidence, and key metrics."
+    },
+    {
+      "name": "get_graph_relationships",
+      "description": "Explore knowledge graph — subsidiaries, parent companies, competitors, partners, and key personnel relationships."
+    },
+    {
+      "name": "get_portfolio_stats",
+      "description": "Portfolio-level analytics — grade distribution, industry breakdown, average quality and completeness, disposition counts."
+    },
+    {
+      "name": "get_intent_summary",
+      "description": "View intent-based scoring context — categories like target, competitor, or excluded, alignment scores, and intent profile criteria."
+    },
+    {
+      "name": "count_companies",
+      "description": "Count companies matching filters — by grade, industry, status, or disposition. Quick portfolio sizing."
+    },
+    {
+      "name": "get_discovered_entities",
+      "description": "List entities discovered through research and verification — potential competitors, partners, and related companies."
+    },
+    {
+      "name": "get_recent_activity",
+      "description": "Recent verification runs, research reports, and enrichment activity across the user's knowledge graph."
+    },
+    {
+      "name": "temporal_get_snapshots",
+      "description": "View historical verification snapshots for a company — see how data changed over time with full field-level audit trail."
+    }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "keywords": [
+    "knowledge-graph",
+    "data-verification",
+    "sales-intelligence",
+    "company-research",
+    "contacts",
+    "crm"
+  ]
+}
